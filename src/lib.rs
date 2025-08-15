@@ -1,5 +1,5 @@
 mod matrix;
-mod ops;
+pub mod ops;
 
 #[cfg(test)]
 mod tests;

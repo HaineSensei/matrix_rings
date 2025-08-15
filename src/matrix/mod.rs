@@ -1,4 +1,6 @@
-use std::{fmt::Debug, ops::Index};
+use std::{fmt::Debug, ops::{Add, Index}};
+
+use num_traits::Zero;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct Matrix<R, const ROWS: usize, const COLS: usize> {
@@ -54,5 +56,17 @@ impl<'a, R, const ROWS: usize, const COLS: usize> Index<(usize, usize)> for Matr
 
     fn index(&self, (row, col): (usize, usize)) -> &'a R {
         &self.vals[row][col]
+    }
+}
+
+impl<R,const DIM: usize> Matrix<R,DIM,DIM> {
+    pub fn trace(&self) -> R
+    where 
+        R: Zero,
+        for<'a,'b> &'a R: Add<&'b R, Output = R>
+    {
+        (0..DIM)
+        .map(|i|&self.vals[i][i])
+        .fold(R::zero(),|x,y|&x + y)
     }
 }
