@@ -1,11 +1,11 @@
 use std::{array::from_fn, fmt::Debug, ops::Add};
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct Matrix<R, const ROWS: usize, const COLS: usize> {
     vals: [[R;COLS];ROWS]
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct MatrixRef<'a, R, const ROWS: usize, const COLS: usize> {
     vals: &'a [[R;COLS];ROWS]
 }
